@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import EditMenu from './EditMenu';
-import axios from "axios";
+import axiosWithAuth from './../helpers/axiosWithAuth';
 
 const initialColor = {
   color: "",
@@ -8,6 +8,7 @@ const initialColor = {
 };
 
 const ColorList = ({ colors, updateColors }) => {
+  // console.log("colors props:", colors);
   const [editing, setEditing] = useState(false);
   const [colorToEdit, setColorToEdit] = useState(initialColor);
 
@@ -18,10 +19,41 @@ const ColorList = ({ colors, updateColors }) => {
 
   const saveEdit = e => {
     e.preventDefault();
-
+    axiosWithAuth()
+      .put(`/colors/${colorToEdit.id}`, colorToEdit)
+      .then((res) => {
+        // console.log("Success Put ColorList:", res.data);
+        updateColors(
+          colors.map(color => {
+            if (color.id === res.data.id) {
+              return res.data;
+            } else {
+              return color;
+            }
+          })
+        );
+      })
+      .catch((err) => {
+        console.log("Error Put ColorList:", err.message);
+      });
   };
 
   const deleteColor = color => {
+    axiosWithAuth()
+      .delete(`/colors/${color.id}`)
+        .then((res) => {
+          // Delete on server end
+          // console.log("Success Delete ColorList:", res);
+          // Delete on client end
+          updateColors(
+            colors.filter(color => {
+              return color.id !== Number(res.data)
+            })
+          );
+        })
+        .catch((err) => {
+          console.log("Error Delete ColorList:", err.message);
+        });
   };
 
   return (

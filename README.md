@@ -55,9 +55,9 @@ Build a login form to authenticate your users.
 
 #### Stage 2 - Consuming the API
 
-- [ ] When `BubblePage` renders, make a GET request to fetch the color data for your bubbles.
-- [ ] In `ColorList.js`, complete the `saveEdit` and `deleteColor` functions to make AJAX requests to the API to edit/delete data
-- [ ] Watch and enjoy as your app responds to updates in the data. Check out `Bubbles.js` to see how this is built.
+- [x] When `BubblePage` renders, make a GET request to fetch the color data for your bubbles.
+- [x] In `ColorList.js`, complete the `saveEdit` and `deleteColor` functions to make AJAX requests to the API to edit/delete data
+- [x] Watch and enjoy as your app responds to updates in the data. Check out `Bubbles.js` to see how this is built.
 
 #### API Documentation
 
@@ -84,7 +84,7 @@ After finishing your required elements, you can push your work further. These go
 
 Follow these steps for completing your project.
 
-- [ ] Ensure that your projects are complete on your <firstName-lastName> branch.
-- [ ] Merge your <firstName-lastName> branch into your main branch.
-- [ ] Push your main branch to github and check that it is registers within codegrade.
-- [ ] Check your personal feedback the following Monday. For more information check [here](https://www.notion.so/lambdaschool/How-to-View-Feedback-in-CodeGrade-Student-facing-c5147cee220c4044a25de28bcb6bb54a)
+- [x] Ensure that your projects are complete on your <firstName-lastName> branch.
+- [x] Merge your <firstName-lastName> branch into your main branch.
+- [x] Push your main branch to github and check that it is registers within codegrade.
+- [x] Check your personal feedback the following Monday. For more information check [here](https://www.notion.so/lambdaschool/How-to-View-Feedback-in-CodeGrade-Student-facing-c5147cee220c4044a25de28bcb6bb54a)
