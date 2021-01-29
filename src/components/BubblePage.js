@@ -1,25 +1,23 @@
 import React, { useEffect, useState } from "react";
-import axiosWithAuth from './../helpers/axiosWithAuth';
 
 import Bubbles from "./Bubbles";
 import ColorList from "./ColorList";
+import { fetchBubblesData } from '../api/fetchBubblesData';
 
 const BubblePage = () => {
   const [colorList, setColorList] = useState([]);
 
+  const getColors = () => {
+    fetchBubblesData()
+      .then((res) => {
+        // console.log("Success Get-Fetch Colors:", res.data);
+        setColorList(res.data);
+      });
+  }
+
   // Summon bubbles to appear
   useEffect(() => {
-    axiosWithAuth()
-      .get('/colors')
-        .then((res) => {
-          // Bubble data appears on server side
-          // console.log("Success Get BubblesPage:", res.data);
-          // Bubble data appears on client side
-          setColorList(res.data);
-        })
-        .catch((err) => {
-          console.log("Error Get BubblesPage:", err.message);
-        })
+    getColors()
   }, []);
 
   return (

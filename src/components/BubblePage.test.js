@@ -1,6 +1,8 @@
 import React from "react";
-import { render, screen } from "@testing-library/react";
-import BubblePage from "./BubblePage";
+import { render, screen, waitFor } from "@testing-library/react";
+import BubblePage from './BubblePage';
+import { fetchBubblesData as mockFetchBubblesData } from "../api/fetchBubblesData";
+jest.mock('../api/fetchBubblesData');
 
 const bubblesColorData = [
   { 
@@ -65,11 +67,14 @@ test("Renders BubblePage without errors", () => {
   render(<BubblePage />);
 });
 
-test("Fetches data and renders the bubbles on mounting", () => {
+test("Fetches data and renders the bubbles on mounting", async () => {
   // Finish this test
-  render(<BubblePage bubblesColor={bubblesColorData} />);
+  mockFetchBubblesData.mockResolvedValueOnce(bubblesColorData);
+  render(<BubblePage colors={bubblesColorData} />);
 
-  const searchColor = screen.getByText(/aliceblue/i);
+  await waitFor(async () => {
+    expect(await screen.findByText(/bubbles/i)).toBeInTheDocument();
+  })
 });
 
 //Task List
