@@ -18,10 +18,28 @@ const ColorList = ({ colors, updateColors }) => {
 
   const saveEdit = e => {
     e.preventDefault();
-
+    axios
+      .put(`http://localhost:5000/api/colors/${colorToEdit.id}`, colorToEdit)
+      .then((res) => {
+        // console.log("Success Put ColorList:", res);
+        updateColors(colorToEdit);
+      })
+      .catch((err) => {
+        console.log("Error Put ColorList:", err.message);
+      });
   };
 
   const deleteColor = color => {
+    axios
+      .delete(`http://localhost:5000/api/colors/${colorToEdit.id}`)
+        .then((res) => {
+          console.log("Success Delete ColorList:", res);
+          updateColors(res.data);
+          window.location.reload();
+        })
+        .catch((err) => {
+          console.log("Error Delete ColorList:", err.message);
+        })
   };
 
   return (

@@ -8,12 +8,15 @@ import ColorList from "./ColorList";
 const BubblePage = () => {
   const [colorList, setColorList] = useState([]);
 
+  // Summon bubbles to appear
   useEffect(() => {
     axiosWithAuth()
       .get('/colors')
         .then((res) => {
-          console.log("Success Get BubblesPage:", res);
-          // setColorList(res.data);
+          // Bubble data appears on server side
+          // console.log("Success Get BubblesPage:", res.data);
+          // Bubble data appears on client side
+          setColorList(res.data);
         })
         .catch((err) => {
           console.log("Error Get BubblesPage:", err.message);
