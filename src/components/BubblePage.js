@@ -12,8 +12,11 @@ const BubblePage = () => {
       .then((res) => {
         // console.log("Success Get-Fetch Colors:", res.data);
         setColorList(res.data);
-      });
-  }
+      })
+      .catch((err) => {
+        console.log("Error Get-Fetch Colors:", err.message);
+      })
+  };
 
   // Summon bubbles to appear
   useEffect(() => {
