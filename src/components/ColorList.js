@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import EditMenu from './EditMenu';
-import axios from "axios";
+import axiosWithAuth from './../helpers/axiosWithAuth';
 
 const initialColor = {
   color: "",
@@ -8,6 +8,7 @@ const initialColor = {
 };
 
 const ColorList = ({ colors, updateColors }) => {
+  // console.log("colors props:", colors);
   const [editing, setEditing] = useState(false);
   const [colorToEdit, setColorToEdit] = useState(initialColor);
 
@@ -18,11 +19,19 @@ const ColorList = ({ colors, updateColors }) => {
 
   const saveEdit = e => {
     e.preventDefault();
-    axios
-      .put(`http://localhost:5000/api/colors/${colorToEdit.id}`, colorToEdit)
+    axiosWithAuth()
+      .put(`/colors/${colorToEdit.id}`, colorToEdit)
       .then((res) => {
-        // console.log("Success Put ColorList:", res);
-        updateColors(colorToEdit);
+        // console.log("Success Put ColorList:", res.data);
+        updateColors(
+          colors.map(color => {
+            if (color.id === res.data.id) {
+              return res.data;
+            } else {
+              return color;
+            }
+          })
+        );
       })
       .catch((err) => {
         console.log("Error Put ColorList:", err.message);
@@ -30,16 +39,21 @@ const ColorList = ({ colors, updateColors }) => {
   };
 
   const deleteColor = color => {
-    axios
-      .delete(`http://localhost:5000/api/colors/${colorToEdit.id}`)
+    axiosWithAuth()
+      .delete(`/colors/${color.id}`)
         .then((res) => {
-          console.log("Success Delete ColorList:", res);
-          updateColors(res.data);
-          window.location.reload();
+          // Delete on server end
+          // console.log("Success Delete ColorList:", res);
+          // Delete on client end
+          updateColors(
+            colors.filter(color => {
+              return color.id !== Number(res.data)
+            })
+          );
         })
         .catch((err) => {
           console.log("Error Delete ColorList:", err.message);
-        })
+        });
   };
 
   return (

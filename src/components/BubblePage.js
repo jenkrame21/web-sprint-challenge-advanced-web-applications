@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import axiosWithAuth from './../helpers/axiosWithAuth';
-import axios from "axios";
 
 import Bubbles from "./Bubbles";
 import ColorList from "./ColorList";
@@ -21,7 +20,7 @@ const BubblePage = () => {
         .catch((err) => {
           console.log("Error Get BubblesPage:", err.message);
         })
-  }, [])
+  }, []);
 
   return (
     <>
@@ -34,4 +33,4 @@ const BubblePage = () => {
 export default BubblePage;
 
 //Task List:
-// [] - 1. Make an axios call to retrieve all color data and push to state on mounting.
+// [x] - 1. Make an axios call to retrieve all color data and push to state on mounting.
