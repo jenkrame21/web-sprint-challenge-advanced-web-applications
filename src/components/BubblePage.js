@@ -2,20 +2,21 @@ import React, { useEffect, useState } from "react";
 
 import Bubbles from "./Bubbles";
 import ColorList from "./ColorList";
-import { fetchBubblesData } from '../api/fetchBubblesData';
+import axiosWithAuth from "../helpers/axiosWithAuth";
 
 const BubblePage = () => {
   const [colorList, setColorList] = useState([]);
 
   const getColors = () => {
-    fetchBubblesData()
-      .then((res) => {
-        // console.log("Success Get-Fetch Colors:", res.data);
-        setColorList(res.data);
-      })
-      .catch((err) => {
-        console.log("Error Get-Fetch Colors:", err.message);
-      })
+    axiosWithAuth()
+      .get('/colors')
+        .then((res) => {
+          // console.log("Success Get-Fetch Colors:", res.data);
+          setColorList(res.data);
+        })
+        .catch((err) => {
+          console.log("Error Get-Fetch Colors:", err.message);
+        })
   };
 
   // Summon bubbles to appear
